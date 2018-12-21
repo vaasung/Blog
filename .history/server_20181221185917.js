@@ -2,8 +2,6 @@ const http = require('http'),
     fs = require('fs'),
     express = require('express')
 
-const blog = express()
-
 console.clear()
 console.log(''.padEnd(180, '-'))
 

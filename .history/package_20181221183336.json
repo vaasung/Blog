@@ -4,11 +4,12 @@
   "description": "Sample blogs demo",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vaasung/Blog.git"
+    "url": "git+https://github.com/vaasung/blogr.git"
   },
   "keywords": [
     "blogspot"
@@ -16,14 +17,11 @@
   "author": "vasu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vaasung/Blog.git/issues"
+    "url": "https://github.com/vaasung/blogr/issues"
   },
-  "homepage": "https://github.com/vaasung/Blog.git#readme",
+  "homepage": "https://github.com/vaasung/blogr#readme",
   "dependencies": {
     "express": "^4.16.4",
     "mongoose": "^5.4.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.9"
   }
 }

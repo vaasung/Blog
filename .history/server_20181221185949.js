@@ -6,7 +6,7 @@ const blog = express()
 
 console.clear()
 console.log(''.padEnd(180, '-'))
-
+console.log(blog)
 
 
 

@@ -1,21 +1,22 @@
 const http = require('http'),
-    fs = require('fs'),
-    express = require('express')
-
-const blog = express()
+    {
+        fs
+    } = require('fs'),
+    {
+        express
+    } = require('express')
 
 console.clear()
 console.log(''.padEnd(180, '-'))
 
 
+const fileIndex = fs.readFileSync('./index.html'),
+    fileAbout = fs.readFileSync('./about.html', 'utf-8')
 
 
 
 /*
-const fileIndex = fs.readFileSync('./index.html'),
-    fileAbout = fs.readFileSync('./about.html', 'utf-8')
-
-    const server = http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
         // res.setHeader('Content-Type', 'text/plain')
         switch (req.url) {
             case '/favicon.ico':

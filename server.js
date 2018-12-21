@@ -1,15 +1,24 @@
 const http = require('http'),
-    fs = require('fs'),
-    express = require('express')
+  fs = require('fs'),
+  express = require('express')
 
+require('dotenv').config()
 const blog = express()
 
 console.clear()
-console.log(''.padEnd(180, '-'))
+console.log(''.padEnd(180, '#'))
 
+blog.get('/', (request, response) => {
+  response.send({
+    name: 'vas'
+  })
+})
 
-
-
+blog.listen(process.env.PORT || 3000, () => {
+  console.log(
+    `App is runing on the 'http(s)://${process.env.HOST}:${process.env.PORT}'`
+  )
+})
 
 /*
 const fileIndex = fs.readFileSync('./index.html'),

@@ -21,6 +21,7 @@
   "homepage": "https://github.com/vaasung/Blog.git#readme",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "mongoose": "^5.4.0"
   },

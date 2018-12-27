@@ -9,3 +9,5 @@ package-lock.json
 
 demoHtml/
 public/
+UI/
+client/dashboard/

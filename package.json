@@ -4,7 +4,8 @@
   "description": "Sample blogs demo",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "db": "node ./database/dbseed"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-fileupload": "^1.0.0",
     "mongoose": "^5.4.0"
   },
   "devDependencies": {

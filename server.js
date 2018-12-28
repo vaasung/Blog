@@ -4,8 +4,12 @@ const http = require('http'),
     express = require('express'),
     mongoose = require('mongoose'),
     fileUpload = require('express-fileupload'),
-    router = express.Router(),
-    Post = require('./database/models/post')
+    router = express.Router()
+
+const Post = require('./database/models/post'),
+    User = require('./database/models/user')
+
+//max-old-space-size=4096 fileneme.js
 
 require('dotenv').config()
 
@@ -29,20 +33,21 @@ blog.engine('html', require('ejs').renderFile)
 blog.set('view engine', 'html')
 blog.set('views', path.join(__dirname, 'client/templates'))
 
-/* 
-blog.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  });
- */
 // blog.set('view engine', 'ejs')
+
+const midd = (req, res, next) => {
+    console.log('Hello from Middleware')
+    next()
+}
 
 blog.use(fileUpload())
 blog.use('/cl', express.static(path.resolve(__dirname, 'client')))
-blog.use([express.json(), express.urlencoded({
-    extended: true
-})])
+blog.use([
+    express.json(),
+    express.urlencoded({
+        extended: true
+    })
+])
 
 // blog.use('/post/:id', function (req, res, next) {
 
@@ -57,6 +62,7 @@ blog.get('/', (request, response) => {
         title: 'BlogR© Home Page'
     })
 })
+
 blog.get('/post/:id', async (request, response) => {
     const post = await Post.findById({
         _id: request.params.id
@@ -66,11 +72,12 @@ blog.get('/post/:id', async (request, response) => {
         post
     })
 })
+
 blog.get('/posts', async (request, response) => {
     // response.sendFile(path.resolve(__dirname, 'demoHtml/index.html'))
     // response.sendFile(path.resolve(__dirname, 'client/index.html'))
     const posts = await Post.find({}).sort({
-        'createdAt': -1
+        createdAt: -1
     })
 
     response.render('pages/posts', {
@@ -89,16 +96,34 @@ blog.get('/admin', (request, response) => {
 })
 
 blog.post('/post/add', (request, response) => {
-
     let data = request.body
-    
+    const {
+        poster
+    } = request.files
+    data.image = poster.name
+
     Post.create(data)
         .then(d => {
-            request.files.poster.mv(path.resolve(__dirname, './client/serverFiles'), (error) => {
-                console.log('File created...')
-            })
-            console.log(d, ' Inserted succesfully')
-            // response.redirect('/posts')
+            poster.mv(
+                path.resolve(__dirname, `client/files/images/${d._id}_${data.image}`),
+                error => {
+                    if (error) {
+                        console.log(error)
+                    }
+                    // update imagename
+                    Post.findByIdAndUpdate({
+                            _id: d._id
+                        }, {
+                            $set: {
+                                image: `files/images/${d._id}_${data.image}`
+                            }
+                        })
+                        .then(e => console.log('image succefully added ', e))
+                        .catch(e => console.log(e))
+                }
+            )
+
+            response.redirect('/posts')
         })
         .catch(e => {
             response.send(e.message)
@@ -108,36 +133,61 @@ blog.post('/post/add', (request, response) => {
     response.end('data')
 })
 
-blog.listen(process.env.PORT, () => {
+blog.get('/register', (request, response) => {
+    response.render('pages/register', {
+        title: 'User Registration'
+    })
+})
+
+blog.post('/user/register', (request, response) => {
+    console.log(Post)
+    const body = request.body
+    User.create(body)
+        .then(d => {
+            console.log(d)
+            response.send(d)
+        })
+        .catch(e => {
+            console.log(e)
+            response.send(e)
+        })
+})
+
+blog.listen(process.env.PORT || 3000, () => {
     console.log(
-        `App is runing on the 'http(s)://${process.env.HOST}:${process.env.PORT}'`
+        `App is runing on the 'http(s)://${process.env.HOST}:${process.env.PORT}`
     )
 })
 
+process.on('SIGINT', () => {
+    console.log('Bye'.padEnd(100, '.'))
+    mongoose.disconnect()
+    process.exit()
+})
 /*
 const fileIndex = fs.readFileSync('./index.html'),
-    fileAbout = fs.readFileSync('./about.html', 'utf-8')
-
-    const server = http.createServer((req, res) => {
-        // res.setHeader('Content-Type', 'text/plain')
-        switch (req.url) {
-            case '/favicon.ico':
-                return
-                break
-            case '/':
-                return res.end(fileIndex)
-                break
-            case '/about':
-                res.write(fileAbout)
-                return res.end()
-                break
-            case '/contact':
-                return res.end('<h1>This is Contact page</h1>')
-            default:
-                res.writeHead(404)
-                return res.end('No page found')
-                break
-        }
-    })
-    .listen(3000)
-    */
+fileAbout = fs.readFileSync('./about.html', 'utf-8')
+    
+const server = http.createServer((req, res) => {
+    // res.setHeader('Content-Type', 'text/plain')
+    switch (req.url) {
+        case '/favicon.ico':
+        return
+        break
+        case '/':
+        return res.end(fileIndex)
+        break
+        case '/about':
+        res.write(fileAbout)
+        return res.end()
+        break
+        case '/contact':
+        return res.end('<h1>This is Contact page</h1>')
+        default:
+        res.writeHead(404)
+        return res.end('No page found')
+        break
+    }
+})
+.listen(3000)
+*/

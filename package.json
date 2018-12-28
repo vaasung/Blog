@@ -25,7 +25,8 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
-    "mongoose": "^5.4.0"
+    "mongoose": "^5.4.0",
+    "mongoose-bcrypt": "^1.6.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

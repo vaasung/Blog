@@ -1,13 +1,14 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose'),
+    bcrypt = require('mongoose-bcrypt')
 
 userScheme = new mongoose.Schema({
     firstName: {
         type: String,
-        required: [true, 'First name is required']
+        required: [true, 'First name is required....']
     },
     lastName: {
         type: String,
-        required: [true, 'Last name is required']
+        required: [true, 'Last name is required....']
     },
     email: {
         type: String,
@@ -15,8 +16,17 @@ userScheme = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, 'Password Required']
+        required: [true, 'Password Required'],
+        bcrypt: true
     },
-    avatorUrl: String
+    photo: String,
+    dob: Date,
+    gender: String,
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    }
 })
+userScheme.plugin(bcrypt)
+
 module.exports = mongoose.model('User', userScheme)

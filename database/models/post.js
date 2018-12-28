@@ -14,7 +14,7 @@ const PostSchema = new mongoose.Schema({
         required: [true, 'Cannot post without contents']
     },
     image: {
-        url: String,
+        type: String,
         // required: [true, 'Image required']
     },
     createdAt: {
@@ -27,12 +27,21 @@ const PostSchema = new mongoose.Schema({
     tags: [],
     comments: [{
         author: {
-            type: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        comment: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comments'
+        }],
+        commentedDate: {
+            type: Date,
+            default: Date.now()
         }
     }],
     author: {
-        type: String,
-        // ref: 'User',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         default: 'Vasu' // Remove later this default
     }
 })

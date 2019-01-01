@@ -1,2 +1,2 @@
-will be added soon...
+Sample blog page, (Not yet Completed :())
 

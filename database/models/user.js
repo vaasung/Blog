@@ -1,7 +1,14 @@
 const mongoose = require('mongoose'),
     bcrypt = require('mongoose-bcrypt')
 
-userScheme = new mongoose.Schema({
+
+const emailValidation = (email => {
+    let emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(email)
+}, 'You r invalid email')
+
+
+UserScheme = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, 'First name is required....']
@@ -12,21 +19,44 @@ userScheme = new mongoose.Schema({
     },
     email: {
         type: String,
+        required: [true, 'Email is required....'],
         unique: true
+        // validate: emailValidation
     },
     password: {
         type: String,
         required: [true, 'Password Required'],
         bcrypt: true
     },
-    photo: String,
+    nickName: String,
+    title: String,
+    country: String,
     dob: Date,
     gender: String,
+    website: String,
+    profilePic: {
+        type: String,
+        default: '/cl/files/images/profile_images/d/avatarD.png'
+    },
+    coverPic: {
+        type: String,
+        default: '/cl/files/images/profile_images/d/coverD.jpg'
+    },
+    description: {
+        type: String,
+        default: 'Lorum ipsum'
+    },
     createdAt: {
         type: Date,
         default: Date.now()
     }
 })
-userScheme.plugin(bcrypt)
 
-module.exports = mongoose.model('User', userScheme)
+UserScheme.plugin(bcrypt)
+
+UserScheme.path('email').validate(email => {
+    let emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(email)
+}, 'This Email is invalid...')
+
+module.exports = mongoose.model('User', UserScheme)

@@ -1,0 +1,86 @@
+<div class="list-group ">
+    <div class="card hovercard">
+        <div id="uploadCoverImg" class="cardheader" style="background-image:url('<%-user.coverPic %>')">
+        </div>
+        <div id="uploadProfileImg" class="avatar" style="background-image: url('<%-user.profilePic %>')">
+        </div>
+        <div class="info">
+            <div class="title">
+                <a class="userName" href="/">
+                    <%-user.firstName %>
+                    <%-user.lastName %></a>
+            </div>
+            <div class="desc">
+                <%-user.nickName%>
+            </div>
+            <div class="desc">
+                <%-user.title%>
+            </div>
+            <div class="desc">
+                <%-user.country%>
+            </div>
+            <div class="desc web">
+                <a target="_blank" href="<%-user.website%>"> <%-user.website%></a>
+            </div>
+            <br>
+            <div class="photos">
+                <form method="POST" action="/uploadProfile" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="profileUPic" class="col-4 col-form-label">Profile Photo</label>
+                        <div class="col-8">
+                            <input type="file" id="profileUPic" name="profileUPic" class="form-control here" onchange="this.form.submit()">
+                        </div>
+                    </div>
+                </form>
+                <form method="POST" action="/uploadCover" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="coverUPic" class="col-4 col-form-label">Background Photo</label>
+                        <div class="col-8">
+                            <input type="file" id="coverUPic" name="coverUPic" class="form-control here" onchange="this.form.submit()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="list-group ">
+            <a href="" class="list-group-item list-group-item-action active">Dashboard</a>
+            <a href="" class="list-group-item list-group-item-action">User Management</a>
+            <a href="" class="list-group-item list-group-item-action">Post</a>
+            <a href="" class="list-group-item list-group-item-action">Category</a>
+            <a href="" class="list-group-item list-group-item-action">Comments</a>
+            <a href="" class="list-group-item list-group-item-action">Reports</a>
+            <a href="" class="list-group-item list-group-item-action">Settings</a>
+            <a href="/logout" class="list-group-item list-group-item-action">Logout</a>
+
+
+        </div>
+        <div class="bottom">
+            <a class="btn btn-primary btn-twitter btn-sm" href="">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a class="btn btn-danger btn-sm" rel="publisher" href="">
+                <i class="fa fa-google-plus"></i>
+            </a>
+            <a class="btn btn-primary btn-sm" rel="publisher" href="">
+                <i class="fa fa-facebook"></i>
+            </a>
+            <a class="btn btn-warning btn-sm" rel="publisher" href="">
+                <i class="fa fa-behance"></i>
+            </a>
+        </div>
+    </div>
+
+</div>
+<script>
+    let profileUPic = document.getElementById('profileUPic'),
+        coverUPic = document.getElementById('coverUPic'),
+        uploadProfileImg = document.getElementById('uploadProfileImg'),
+        uploadCoverImg = document.getElementById('uploadCoverImg')
+
+    uploadCoverImg.addEventListener('click', function (e) {
+        coverUPic.click()
+    })
+    uploadProfileImg.addEventListener('click', function (e) {
+        profileUPic.click()
+    })
+</script>

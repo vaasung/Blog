@@ -21,10 +21,13 @@
   },
   "homepage": "https://github.com/vaasung/Blog.git#readme",
   "dependencies": {
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.3",
     "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-fileupload": "^1.0.0",
+    "express-session": "^1.15.6",
     "mongoose": "^5.4.0",
     "mongoose-bcrypt": "^1.6.0"
   },

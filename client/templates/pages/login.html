@@ -21,38 +21,22 @@
             <div class="row">
 
                 <div class="col-md-offset-1 col-md-10 col-sm-12">
-                    <h2>Add New Post..</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-
-                    <form action="/post/add" method="POST" encType="multipart/form-data">
+                    <h2>Login</h2>
+                    <% if( loginError) {%>
+                    <p class="text-danger">
+                        <%-loginError%>
+                    </p>
+                    <%}%>
+                    <form action="/user/login" method="POST" autocomplete="off">
                         <div class="col-md-12 col-sm-12">
-                            <input name="title" type="text" class="form-control" value="666" id="name" placeholder="Name">
+                            <input name="email" type="text" class="form-control" id="email" placeholder="Email" value="wow@wow.com">
                         </div>
                         <div class="col-md-12 col-sm-12">
-                            <input name="description" type="text" value="555" class="form-control" id="description"
-                                placeholder="description">
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Password"
+                                value="wow">
                         </div>
-                        <div class="col-md-12 col-sm-12">
-                            <textarea name="content" rows="5" class="form-control" id="content" placeholder="content">WOW</textarea>
-                        </div>
-                        <div class="col-md-12 col-sm-12">
-                            <input name="poster" type="file" class="form-control" id="image">
-                        </div>
-
-                        <div class="col-md-12 col-sm-12">
-                            <select name="tags">
-                                <option disabled="disabled" selected>Select the Tag</option>
-                                <option value="tag1">tag1</option>
-                                <option value="tag2">tag2</option>
-                                <option value="tag3">tag3</option>
-                            </select>
-                        </div>
-
                         <div class="col-md-3 col-sm-6">
-                            <input type="submit" class="form-control" id="submit" value="Create Post">
+                            <input type="submit" class="form-control" id="login" value="Login">
                         </div>
                     </form>
                 </div>

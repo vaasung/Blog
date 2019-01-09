@@ -16,15 +16,14 @@
 </pre>
      <%- include('../includes/navigation.html'); %>
      <!-- Home Section -->
-
-     <section id="home" class="main-single-post parallax-section" style="background-image: url(/cl/<%- post.image %>">
+     <section id="home" class="main-single-post parallax-section" style="background-image: url('/cl/<%- post.image%>')">
           <div class="overlay"></div>
           <div class="container">
                <div class="row">
 
                     <div class="col-md-12 col-sm-12">
                          <h1>
-                              <%- post.name %>
+                              <%- post.title %>
                          </h1>
                     </div>
 
@@ -43,12 +42,18 @@
 
 
                               <div class="blog-post-title">
-                                   <h2>We Help You Create Perfect Modern Design</a></h2>
+                                   <h2>
+                                        <%- post.title %>
+                                   </h2>
                               </div>
 
                               <div class="blog-post-format">
-                                   <span><a href="#"><img src="/cl/images/author-image1.jpg" class="img-responsive img-circle">
-                                             Jen Lopez</a></span>
+                                   <span>
+                                        <a href="#">
+                                             <img src="<%- post.author.profilePic %>" class="img-responsive img-circle">
+                                             <%- post.author.firstName %>
+                                        </a>
+                                   </span>
                                    <span><i class="fa fa-date"></i> July 22, 2017</span>
                                    <span><a href="#"><i class="fa fa-comment-o"></i> 124 Comments</a></span>
                               </div>
@@ -97,14 +102,18 @@
                               <div class="blog-author">
                                    <div class="media">
                                         <div class="media-object pull-left">
-                                             <img src="/cl/images/author-image1.jpg" class="img-circle img-responsive"
+                                             <img src="<%- post.author.profilePic %>" class="img-circle img-responsive"
                                                   alt="blog">
                                         </div>
                                         <div class="media-body">
-                                             <h3 class="media-heading"><a href="#">Jen Lopez ( Designer )</a></h3>
-                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+                                             <h3 class="media-heading">
+                                                  <a href="#">
+                                                       <%- post.author.firstName %>
+                                                  </a>
+                                             </h3>
+                                             <p>
+                                                  <%- post.author.description %>
+                                             </p>
                                         </div>
                                    </div>
                               </div>

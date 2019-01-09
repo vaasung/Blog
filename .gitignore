@@ -11,5 +11,8 @@ demoHtml/
 public/
 UI/
 client/dashboard/
+client/files/
 
 demoBcrypt.js
+demoCheckPwd.js
+.env

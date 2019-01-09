@@ -1,0 +1,138 @@
+<%- include('../includes/header.html'); %>
+<%
+    function dob(date) { 
+        let d = new Date(date)
+        return `${d.getFullYear()}-${d.getMonth() < 10 ? '0'+(d.getMonth()+1) : (d.getMonth()+1)}-${d.getDate() < 10 ? '0'+(d.getDate()) : d.getDate()}`
+     }
+%>
+
+
+<!-- <%-dob(user.dob)%>
+<pre>
+    <%-user%>
+</pre> -->
+<div class="userDashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 ">
+                <%- include('./includes/header_user.html'); %>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="profileh2">
+                                    <%-user.firstName%>
+                                    <%-user.lastName%>'s Profile
+                                </h2>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="POST" action="/updateProfile">
+                                    <div class="form-group row">
+                                        <label for="firstName" class="col-4 col-form-label">First Name*</label>
+                                        <div class="col-8">
+                                            <input id="firstName" name="firstName" placeholder="First Name" class="form-control here"
+                                                type="text" value="<%-user.firstName%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lastName" class="col-4 col-form-label">Last Name*</label>
+                                        <div class="col-8">
+                                            <input id="lastName" name="lastName" placeholder="Last Name" class="form-control here"
+                                                type="text" value="<%-user.lastName%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="nickName" class="col-4 col-form-label">Nick Name</label>
+                                        <div class="col-8">
+                                            <input id="nickName" name="nickName" placeholder="Nick Name" class="form-control here"
+                                                type="text" value="<%-user.nickName%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="title" class="col-4 col-form-label">Title</label>
+                                        <div class="col-8">
+                                            <input id="title" name="title" class="form-control here" type="text"
+                                                placeholder="I'm Passionate designer" value="<%-user.title%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="country" class="col-4 col-form-label">Country</i></label>
+                                        <div class="col-8">
+                                            <input id="country" name="country" class="form-control here" type="text"
+                                                placeholder="Country" value="<%-user.country%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="dob" class="col-4 col-form-label">
+                                            Select Your Birthday
+                                        </label>
+                                        <br>
+                                        <div class="col-8">
+                                            <input type="date" id="dob" name="dob" class="form-control here" value="<%-dob(user.dob)%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="gender" class="col-4 col-form-label">Select Your Gender</label>
+                                        <div class="col-8">
+                                            <select name="gender" id="gender">
+                                                <option value="" selected disabled>Choose Your Gender</option>
+                                                <% if (user.gender){%>
+                                                <option value="<%-user.gender%>" selected>
+                                                    <%-user.gender%>
+                                                </option>
+                                                <%if(user.gender === 'Female'){%>
+                                                <option value="Male">Male</option>
+                                                <%}else{%>
+                                                <option value="Female">Female</option>
+                                                <%}%>
+                                                <%} else{%>
+                                                <option value="Female">Female</option>
+                                                <option value="Male">Male</option>
+                                                <%}%>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="email" class="col-4 col-form-label">Email*</label>
+                                        <div class="col-8">
+                                            <input disabled id="email" name="email" placeholder="Email" class="form-control here"
+                                                required="required" type="text" value="<%-user.email%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="website" class="col-4 col-form-label">Website</label>
+                                        <div class="col-8">
+                                            <input id="website" name="website" placeholder="Website" class="form-control here"
+                                                type="text" value="<%-user.website%>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="publicinfo" class="col-4 col-form-label">Descriptions about you</label>
+                                        <div class="col-8">
+                                            <textarea id="publicinfo" name="description" cols="40" rows="4" class="form-control"
+                                                placeholder="Descriptions"><%-user.description%></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-4 col-8">
+                                            <button type="submit" class="btn btn-primary">Update My
+                                                Profile</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,19 +22,33 @@
 
                 <div class="col-md-offset-1 col-md-10 col-sm-12">
                     <h2>Register</h2>
+                    <!-- <% if(formData) { %>
+                    <pre><%- formData.firstName %></pre>
+                    <%}%> -->
+                    <% if(registerError) { %>
+                    <div>
+                        <% registerError.forEach((val, i) =>{ %>
+                        <p class="text-danger">
+                            <%- val.trim() %>
+                        </p>
+                        <%}) %>
+                    </div>
+                    <% } %>
                     <form action="/user/register" method="POST" autocomplete="off">
                         <div class="col-md-12 col-sm-12">
-                            <input name="firstName" type="text" class="form-control" id="firstname" placeholder="First Name">
+                            <input name="firstName" type="text" class="form-control" id="firstName" placeholder="First Name"
+                                value="<%- formData ? formData.firstName : '' %>">
                         </div>
                         <div class="col-md-12 col-sm-12">
-                            <input name="lastName" type="text" class="form-control" id="lastname" placeholder="Last Name">
+                            <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Last Name"
+                                value="<%- formData ? formData.lastName : '' %>">
                         </div>
                         <div class="col-md-12 col-sm-12">
-                            <input name="email" type="text" class="form-control" id="email" placeholder="Email">
+                            <input name="email" type="text" class="form-control" id="email" placeholder="Email" value="<%- formData ? formData.email : '' %>">
                         </div>
                         <div class="col-md-12 col-sm-12">
-                            <input name="password" type="password" class="form-control" id="password"
-                                placeholder="Password">
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Password"
+                                value="">
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <input type="submit" class="form-control" id="register" value="Register Now">

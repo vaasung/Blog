@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const PostSchema = new mongoose.Schema({
-    name: {
+    title: {
         type: String,
-        required: [true, 'Name is required!']
+        required: [true, 'Title is required!']
     },
     description: {
         type: String,
@@ -24,25 +24,16 @@ const PostSchema = new mongoose.Schema({
     comments: {
         type: Number
     },
-    tags: [],
-    comments: [{
-        author: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        comment: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comments'
-        }],
-        commentedDate: {
-            type: Date,
-            default: Date.now()
-        }
-    }],
+    tags: {
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'Category'
+        type: [String]
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        default: 'Vasu' // Remove later this default
+        ref: 'User'
+        // type: String
+        // default: 'Vasu' // Remove later this default
     }
 })
 

@@ -1,18 +1,14 @@
-<%- include('../includes/header.html'); %>
 <%
-    function dob(date) { 
-        let d = new Date(date)
-        return `${d.getFullYear()}-${d.getMonth() < 10 ? '0'+(d.getMonth()+1) : (d.getMonth()+1)}-${d.getDate() < 10 ? '0'+(d.getDate()) : d.getDate()}`
-     }
+function dob(date) { 
+    let d = new Date(date)
+    return `${d.getFullYear()}-${d.getMonth() < 10 ? '0'+(d.getMonth()+1) : (d.getMonth()+1)}-${d.getDate() < 10 ? '0'+(d.getDate()) : d.getDate()}`
+}
 %>
 
-
-<!-- <%-dob(user.dob)%>
-<pre>
-    <%-user%>
-</pre> -->
+<%- include('../includes/header.html'); %>
 <div class="userDashboard">
-    <div class="container">
+<%- include('./includes/header_card.html')%>
+    <div class="wrapper">
         <div class="row">
             <div class="col-md-3 ">
                 <%- include('./includes/header_user.html'); %>

@@ -43,9 +43,9 @@
             </div>
         </div>
         <div class="list-group ">
-            <a href="" class="list-group-item list-group-item-action active">Dashboard</a>
+            <a href="/user/dashboard" class="list-group-item list-group-item-action<% if(name==='dashboard'){%> active <%}%>">Dashboard</a>
             <a href="" class="list-group-item list-group-item-action">User Management</a>
-            <a href="" class="list-group-item list-group-item-action">Post</a>
+            <a href="/user/post" class="list-group-item list-group-item-action <% if(name==='post'){%> active <%}%>">Post</a>
             <a href="" class="list-group-item list-group-item-action">Category</a>
             <a href="" class="list-group-item list-group-item-action">Comments</a>
             <a href="" class="list-group-item list-group-item-action">Reports</a>
@@ -72,6 +72,7 @@
 
 </div>
 <script>
+    
     let profileUPic = document.getElementById('profileUPic'),
         coverUPic = document.getElementById('coverUPic'),
         uploadProfileImg = document.getElementById('uploadProfileImg'),

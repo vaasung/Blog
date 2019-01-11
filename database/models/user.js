@@ -46,6 +46,10 @@ UserScheme = new mongoose.Schema({
         type: String,
         default: 'Lorum ipsum'
     },
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
     createdAt: {
         type: Date,
         default: Date.now()

@@ -249,13 +249,19 @@ blog.get('/posts', async (request, response) => {
     })
 })
 
-blog.post('/post/add', isAuth, (request, response) => {
+blog.post('/post/add', isAuth, async (request, response) => {
     let data = request.body
     const {
         poster
     } = request.files
     data.image = poster.name
+    
+    let user = User.findOne({_id:request.session.id})
+    
     data.author = request.session.userId
+    data.posts = user
+
+
     Post.create(data)
         .then(d => {
             console.log('POST ', d)
@@ -286,10 +292,38 @@ blog.post('/post/add', isAuth, (request, response) => {
 })
 
 
-blog.get('/dashboard', isAuth, async (request, response) => {
+blog.get('/user/dashboard', isAuth, async (request, response) => {
     let user = await User.findById(request.session.userId)
     response.render('user/dashboard', {
         title: 'User Dashboard',
+        name: 'dashboard',
+        user
+    })
+})
+
+blog.get('/user/post', async (request, response) => {
+    // console.log(request.url) // !!Make active button later
+    let user = await User.findById(request.session.userId)
+    let post = await Post.find({author: request.session.userId})
+    
+    console.log(post.length, 'POST')
+
+    User.find({
+            _id: request.session.userId
+        })
+        .populate('posts')
+        .then(d => {
+            // console.log(d)
+        })
+        .catch(e => {
+            console.log(e)
+        })
+
+
+
+    response.render('user/post', {
+        title: "User Posts",
+        name: 'post',
         user
     })
 })
@@ -316,7 +350,7 @@ blog.post('/updateProfile', (request, response) => {
                 .catch(e => console.log('Error On Update'))
         })
         .catch(error => {})
-    response.redirect('/dashboard')
+    response.redirect('/user/dashboard')
 })
 
 blog.post('/uploadProfile', (request, response) => {
@@ -331,12 +365,12 @@ blog.post('/uploadProfile', (request, response) => {
             return
         }
         User.findByIdAndUpdate(request.session.userId, {
-                profilePic: `cl/files/images/profile_images/${profileImgName}`
+                profilePic: `/cl/files/images/profile_images/${profileImgName}`
             })
             .then(d => console.log('Uploaded Profile image'))
             .catch(e => console.log('Error while uploading the profile image'))
     })
-    response.redirect('/dashboard')
+    response.redirect('/user/dashboard')
 })
 
 blog.post('/uploadCover', (request, response) => {
@@ -348,7 +382,7 @@ blog.post('/uploadCover', (request, response) => {
     coverUPic.mv(path.resolve(__dirname, `client/files/images/profile_images/${profileImgName}`), error => {
         if (error) return
         User.findByIdAndUpdate(request.session.userId, {
-                coverPic: `cl/files/images/profile_images/${profileImgName}`
+                coverPic: `/cl/files/images/profile_images/${profileImgName}`
             })
             .then(d => {
                 console.log('Cover Image Updated Successfully')
@@ -357,7 +391,7 @@ blog.post('/uploadCover', (request, response) => {
                 console.log('Cover Image Not able to uploaded')
             })
     })
-    response.redirect('/dashboard')
+    response.redirect('/user/dashboard')
 })
 
 blog.listen(process.env.PORT || 3000, () => {

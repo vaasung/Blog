@@ -15,4 +15,6 @@ client/files/
 
 demoBcrypt.js
 demoCheckPwd.js
+populate.js
+
 .env

@@ -12,9 +12,9 @@ public/
 UI/
 client/dashboard/
 client/files/
-
+clientNg/
 demoBcrypt.js
 demoCheckPwd.js
 populate.js
-
+database/seeds
 .env

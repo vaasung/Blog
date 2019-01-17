@@ -6,7 +6,26 @@
             <div class="col-md-3 ">
                 <%- include('./includes/header_user.html'); %>
             </div>
+            post is
+            <%-post.length%>
             <div class="col-md-9">
+                <% if(post.length <= 0){ %>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-11" style="text-align:center">
+                                    <h3>Hi!
+                                        <%-user.firstName%>, You haven't started any article yet.</h3>
+                                    <p> <a style="text-decoration:underline!important" href="/admin">Click here </a>to
+                                        to Start your article</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+                <% } else{%>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -17,11 +36,12 @@
                                         <div>
                                             <form class="classNameHere" role="search">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Search" name="srch-term"
-                                                        id="srch-term">
+                                                    <input type="text" class="form-control" placeholder="Search by title"
+                                                        name="srch-term" id="srch-term">
                                                 </div>
                                             </form>
                                         </div>
+                                        <!-- <%-post%> -->
                                         <!-- 
     ref image to posts is
     https://cdn.makeawebsitehub.com/wp-content/uploads/2017/09/New-Post.jpg
@@ -30,44 +50,33 @@
                                         <div class="table-responsive">
                                             <table id="mytable" class="table table-bordred table-striped">
                                                 <thead>
-                                                    <th><input type="checkbox" id="checkall" /></th>
-                                                    <th>Select All</th>
                                                     <th></th>
                                                     <th></th>
                                                     <th></th>
-                                                    <th>Delete</th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </thead>
                                                 <tbody>
+                                                    <% post.forEach( (d) =>{ %>
                                                     <tr>
-                                                        <td><input type="checkbox" class="checkthis" /></td>
-                                                        <td class="col-md-1">Image here</td>
-                                                        <td class="col-md-7">
-                                                            <p>"But I must explain to you how all this mistaken idea of
-                                                                denouncing pleasure and praising pain was born and I
-                                                                will give you a complete account of the system, and
-                                                                expound the actual teachings of the great explorer of
-                                                                the truth, the master-builder of human happiness. No
-                                                                one rejects, dislikes, or avoids pleasure itself,
-                                                                because it is pleasure, but because those who do not
-                                                                know how to pursue pleasure rationally encounter
-                                                                consequences that are extremely painful. Nor again is
-                                                                there anyone who loves or pursues or desires to obtain
-                                                                pain of itself, because it is pain, but because
-                                                                occasionally circumstances occur in which toil and pain
-                                                                can procure him some great pleasure. To take a trivial
-                                                                example, which of us ever undertakes laborious physical
-                                                                exercise, except to obtain some advantage from it? But
-                                                                who has any right to find fault with a man who chooses
-                                                                to enjoy a pleasure that has no annoying consequences,
-                                                                or one who avoids a pain that produces no resultant
-                                                                pleasure?"
+                                                        <td><img class="postPrevImg" src="/cl/<%-d.image%>" alt=""></td>
+                                                        <td width=400>
+                                                            <h5>
+                                                                <%-d.title%>
+                                                            </h5>
+                                                            <p class="postContent">
+                                                                <%-d.content%>
                                                             </p>
-                                                            <i>"Thu Jan 10 2019 17:23:54 GMT+0530 (India Standard
-                                                                Time)"</i>
+                                                            <p class="postDesc">
+                                                                <%-d.description%>
+                                                            </p>
+                                                            <div class="tags">
+                                                                <a href="">
+                                                                    <%-d.tags%></a>
+                                                            </div>
                                                         </td>
                                                         <td>
-                                                            <p>Published on <i>"Thu Jan 10 2019 17:23:54 GMT+0530
-                                                                    (India Standard Time)"</i></p>
+                                                            <%-d.createdAt%>
                                                         </td>
                                                         <td>
                                                             <p data-placement="top" data-toggle="tooltip" title="Edit"><button
@@ -81,6 +90,8 @@
                                                                         class="glyphicon glyphicon-trash"></span></button></p>
                                                         </td>
                                                     </tr>
+                                                    <% }) %>
+
                                                 </tbody>
                                             </table>
                                             <div class="clearfix"></div>
@@ -100,6 +111,7 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
             </div>
         </div>
     </div>

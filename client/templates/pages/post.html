@@ -9,11 +9,7 @@
                <span class="sk-inner-circle"></span>
           </div>
      </div>
-     <pre>
-----
-     <%- post %>
-     
-</pre>
+     <pre><%- post %></pre>
      <%- include('../includes/navigation.html'); %>
      <!-- Home Section -->
      <section id="home" class="main-single-post parallax-section" style="background-image: url('/cl/<%- post.image%>')">
@@ -174,17 +170,19 @@
                                         </div>
                                    </div>
                               </div>
-
                               <div class="blog-comment-form">
-                                   <h3>Leave a Comment</h3>
-                                   <form action="#" method="post">
-                                        <input type="text" class="form-control" placeholder="Name" name="name" required>
+                                   <h3>Leave a Comment </h3>
+                                   <form action="/post/comment" method="POST">
+                                        <input type="hidden" name="postId" value="<%-post._id%>">
+                                        <input type="text" class="form-control" placeholder="Name" name="userName" required
+                                             value="<%-user.firstName%>">
                                         <input type="email" class="form-control" placeholder="Email" name="email"
-                                             required>
-                                        <textarea name="message" rows="5" class="form-control" id="message" placeholder="Message"
-                                             message="message" required="required"></textarea>
+                                             required value="<%-user.email%>">
+                                        <textarea name="comments" rows="5" class="form-control" id="message" placeholder="Message"
+                                             message="message" required="required">Nice article, Keep on posting like this articles33333<br><code>
+<p style="color:tomato">Worrw</p></code></textarea>
                                         <div class="col-md-3 col-sm-4">
-                                             <input name="submit" type="submit" class="form-control" id="submit" value="Post Your Comment">
+                                             <input type="submit" class="form-control" id="submit" value="Post Your Comment">
                                         </div>
                                    </form>
                               </div>

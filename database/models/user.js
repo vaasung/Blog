@@ -50,6 +50,10 @@ UserScheme = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comments'
+    }],
     createdAt: {
         type: Date,
         default: Date.now()

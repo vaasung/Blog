@@ -15,25 +15,23 @@ const PostSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        // required: [true, 'Image required']
+        required: [true, 'Image required']
     },
     createdAt: {
         type: Date,
         default: Date.now()
     },
-    comments: {
-        type: Number
-    },
-    tags: {
-        // type: mongoose.Schema.Types.ObjectId,
-        // ref: 'Category'
-        type: [String]
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comments'
+    }],
+    topic: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Topic'
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-        // type: String
-        // default: 'Vasu' // Remove later this default
     }
 })
 
